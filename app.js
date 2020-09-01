@@ -1,5 +1,7 @@
 const fs = require("fs");
 
+const honey = fs.readFileSync("./honey.txt").toString();
+
 function occurrences(string, subString, allowOverlapping) {
 
     string += "";
@@ -26,8 +28,6 @@ function question1(){
     let floorUp = 0
     let floorDown = 0;
 
-    const honey = fs.readFileSync("./honey.txt").toString()
-
     puzzle = honey.toString();
     floorUp += occurrences(puzzle,"(");
     floorDown += occurrences(puzzle,")");
@@ -41,14 +41,11 @@ question1()
 
 function question2(){
     console.time("question2")
-
-    const puzzle = fs.readFileSync("./honey.txt").toString();
-
     let floor = 0;
-    let gotCha = 0;
+    let gotCha = false;
 
-    for (let i = 0; i<=puzzle.length; i++){
-        let character = puzzle.charAt(i);
+    for (let i = 0; i<=honey.length; i++){
+        let character = honey.charAt(i);
 
         if (character === "("){
             floor++;
@@ -56,10 +53,10 @@ function question2(){
             floor--;
         }
 
-        if (gotCha === 0){
+        if (gotCha === false){
             if (floor < 0){
                 console.log("yayyy",++i,floor);
-                gotCha++;
+                gotCha = true;
             }
         }
 
